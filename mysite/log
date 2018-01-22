@@ -1,0 +1,72 @@
+    1  sudo add-apt-repository ppa:danielrichter2007/grub-customizer
+    2  sudo apt-get install grub-customizer
+    3  sudo apt-get install gksudo
+    4  sudo apt-get update
+    5  sudo apt-get install gksudo
+    6  sudo gedit /etc/default/grub
+    7  update-grub
+    8  sudo update-grub
+    9  python
+   10  pip
+   11  virtualenv
+   12  sudo apt install python-pip
+   13  virtualenv
+   14  sudo apt install virtualenv
+   15  sudo get-apt update
+   16  sudo apt-get update
+   17  virtualenv
+   18  virtualenv django1
+   19  ls
+   20  django1
+   21  cd django1
+   22  ls
+   23  source bin activate
+   24  source bin/activate
+   25  deactivate
+   26  source bin/activate
+   27  ls lib
+   28  ls
+   29  ls lib
+   30  ls lib/python2.7
+   31  ls lib/sitepackages
+   32  ls lib/site-packages
+   33  ls lib/python2.7/
+   34  ls lib/python2.7/site-packages/
+   35  sudo pip install django==1.8
+   36  sudo apt-get update
+   37  ls
+   38  ls lib/python2.7/
+   39  ls lib
+   40  ls lib/python2.7/
+   41  cd..
+   42  cdls
+   43  ls
+   44  ls lib/python2.7/site-packages/
+   45  sudo pip install django==1.8
+   46  ls lib/python2.7/dist-packages/
+   47  sudo apt-get uninstall django==1.8
+   48  sudo apt uninstall django==1.8
+   49  sudo pip uninstall django==1.8
+   50  pip install django==1.8
+   51  ls lib/python2.7/site-packages/
+   52  python
+   53  deactivate
+   54  python
+   55  source bin activate
+   56  source bin/activate
+   57  env
+   58  mkdir tutorial1
+   59  ls
+   60  tutorial1
+   61  cd tutorial1
+   62  ls
+   63  django-admin.py startproject mysite
+   64  ls
+   65  cd mysite
+   66  ls
+   67  cd..
+   68  cdexit(9
+   69  historr
+   70  history
+   71  history log
+   72  history > log
