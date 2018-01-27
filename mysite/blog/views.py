@@ -80,7 +80,7 @@ def register_user(request):
         form = MyRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/blog/register_success')
+            return render_to_response('blog/register_success.html')#HttpResponseRedirect('blog/register_success.html')
         
     else:
         form = MyRegistrationForm()
