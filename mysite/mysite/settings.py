@@ -40,6 +40,11 @@ INSTALLED_APPS = (
     'blog',
 )
 
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+)
+
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -52,6 +57,13 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'mysite.urls'
+
+TEMPLATE_DIRS = (
+	'/home/django1/tutorial1/mysite/blog/templates',
+#    os.path.join(BASE_DIR,'templates/'),
+#    os.path.join(PROJECT_DIRECTORY,'articles/templates/'),
+#    os.path.join(PROJECT_DIRECTORY,'userprofile/templates/'),
+)
 
 TEMPLATES = [
     {

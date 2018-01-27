@@ -1,0 +1,2 @@
+24/1: HTML is space sensitive
+27/1: Basic understanding of folder structure throughout the project
