@@ -1,2 +1,3 @@
 24/1: HTML is space sensitive
 27/1: Basic understanding of folder structure throughout the project
+28/1: It is a good idea to separate different apps/functions into different folders

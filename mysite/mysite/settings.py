@@ -16,6 +16,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
@@ -38,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
+	'accounts',
 )
 
 TEMPLATE_LOADERS = (
@@ -58,12 +60,6 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'mysite.urls'
 
-TEMPLATE_DIRS = (
-	'/home/django1/tutorial1/mysite/blog/templates',
-#    os.path.join(BASE_DIR,'templates/'),
-#    os.path.join(PROJECT_DIRECTORY,'articles/templates/'),
-#    os.path.join(PROJECT_DIRECTORY,'userprofile/templates/'),
-)
 
 TEMPLATES = [
     {

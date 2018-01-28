@@ -1,2 +1,4 @@
 27/1: When trying to register a user, it redirects to register/blog/register instead of blog/register. Have looked into this and tested different things and found one sort-of-fix (setting up a new url to go to the appropriate view) but this comes with more issues (any further navigation adds the /register/ prefix so it would be necessary to make new urls for every existing url)
-27/1: The registration process appears to work (when circumventing the issue mentioned previously) but no new user is actually created.
+27/1: The registration process appears to work (when circumventing the issue mentioned previously) but no new user is actually created. 
+
+28/1: Registration process now works and creates users, but the redirect problem persists. 

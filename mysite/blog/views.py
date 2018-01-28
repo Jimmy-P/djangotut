@@ -6,8 +6,9 @@ from django.contrib.auth.models import User
 from .models import Post
 from django.template import RequestContext
 #from django.views.decorators.csrf import csrf_exempt
-from .forms import MyRegistrationForm
-#from django.contrib.auth.forms import UserCreationForm
+#from .forms import MyRegistrationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+#from django.contrib.auth import login, logout
 
 #Prints the 10 first objects in the list
 def post_list(request):
@@ -41,56 +42,9 @@ def createblog(request):
 		}
 
 		return render(request, 'blog/create_blog.html', user)
-#@csrf_exempt
-def login(request):
-	c = {}
-	c.update(csrf(request))
-	return render_to_response('blog/login.html', c)
-
-#@csrf_exempt
-def auth_view(request):
-	print '1'
-	username = request.POST.get('username', '')
-	password = request.POST.get('password', '')
-	user = auth.authenticate(username=username, password=password)
-
-	print '2'
-	if user is not None:
-		auth.login(request, user)
-		return render_to_response ('blog/loggedin.html')#HttpResponseRedirect('blog/loggedin.html')
-	else:
-		return render_to_response ('blog/invalid.html')#HttpResponseRedirect('blog/invalid.html')
-
-def loggedin(request):
-	return render_to_response('blog/loggedin.html', {'full_name': request.user.username},
-                   context_instance=RequestContext(request))
-
-def invalid_login(request):
-	return render_to_response('blog/invalid_login.html')
-
-def logout(request):
-	auth.logout(request)
-	return render_to_response('blog/logout.html')
 
 def base(request):
 	return render_to_response('blog/base.html')
 
-def register_user(request):
-    if request.method == 'POST':
-        form = MyRegistrationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return render_to_response('blog/register_success.html')#HttpResponseRedirect('blog/register_success.html')
-        
-    else:
-        form = MyRegistrationForm()
-    args = {}
-    args.update(csrf(request))
-    
-    args['form'] = form
-    
-    return render_to_response('blog/register.html', args)
 
-def register_success(request):
-    return render_to_response('blog/register_success.html')
 
