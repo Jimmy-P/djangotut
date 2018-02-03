@@ -2,3 +2,5 @@
 27/1: The registration process appears to work (when circumventing the issue mentioned previously) but no new user is actually created. 
 
 28/1: Registration process now works and creates users, but the redirect problem persists. 
+
+3/2: I've started from scratch following the Django By Example videos. I've setup the basic blog and comments functions, but the comments form is not rendering despite my code seemingly being identical to the tutorial content.

@@ -1,3 +1,5 @@
-24/1: HTML is space sensitive
+24/1: Django inserted into html is whitespace sensitive
 27/1: Basic understanding of folder structure throughout the project
 28/1: It is a good idea to separate different apps/functions into different folders
+31/1: It's better to use spaces than tabs to avoid indentation errors; luckily you can set it up so pressing tab inserts 4 spaces and maintain sanity
+3/2: Should use a double underscore for lookups that span relations
