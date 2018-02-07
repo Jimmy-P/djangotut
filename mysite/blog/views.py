@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404#, redirect, render_to_response
+from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from django.http import HttpResponseRedirect
 from django.contrib import auth
 from django.core.context_processors import csrf
@@ -53,7 +53,6 @@ def post_detail(request, year, month, day, post):
                                     publish__year=year,
                                     publish__month=month,
                                     publish__day=day)
-    return render(request, 'blog/post/detail.html', {'post': post})
 
     #Comments list for this post
     comments = post.comments.filter(active=True)
@@ -98,27 +97,28 @@ def post_share(request, post_id):
                                                     'sent': sent})
 
 
-#adds a new object to the list using title, author and body
-#def createblog(request):
-#
-#	if(request.method == 'POST'):
-#		print "request.POST", request.POST
-#		title = request.POST['title']
-#		author = request.POST['author']
-#		body = request.POST['body']
-#		u = User.objects.get(id=int(author))			
-#		post = Post(title=title, author=u, body=body)
-#		post.save()
-#
-#		return redirect('/post')
-#	else:
+#adds a new Post object to the list using title, author and body
+def postblog(request):
+
+    if(request.method == 'POST'):
+        print "request.POST", request.POST
+        title = request.POST['title']
+        author = request.user.get_username()#request.POST['author']#
+        body = request.POST['body']
+        u = User.objects.get(id=int(author))			
+        post = Post(title=title, author=u, body=body,)
+        status = 'published'
+        post.save()
+
+        return redirect('/blog')#return render(request, 'blog/post_blog.html')
+    else:
 #		print "request.user", request.user.id
-#		users = User.objects.all()
-#		user = {
-#		      'users':users
-#		}
-#
-#		return render(request, 'blog/create_blog.html', user)
+		users = User.objects.all()
+		user = {
+		      'users':users
+		}
+
+		return render(request, 'blog/post_blog.html'    )
 #
 #def base(request):
 #	return render_to_response('blog/base.html')

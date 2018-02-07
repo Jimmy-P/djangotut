@@ -14,7 +14,7 @@ urlpatterns = [
 	url(r'^invalid$', 'accounts.views.invalid_login'),
 	url(r'^register/$', 'accounts.views.register_user'),
 	url(r'^register_success/$', 'accounts.views.register_success'),
-	url(r'^accounts/register/$', 'accounts.views.register_user'),
+	url(r'^register/$', 'accounts.views.register_user'),
 
 
 ]

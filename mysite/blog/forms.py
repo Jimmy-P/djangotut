@@ -41,4 +41,9 @@ class EmailPostForm(forms.Form):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ('name', 'email', 'body')
+        fields = ('body',)#('name', 'email', 'body')
+
+#class PostForm(forms.Form):
+#    class Meta:
+#        model = Post
+#        author = request.user.get_username()

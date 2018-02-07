@@ -18,12 +18,11 @@ def login(request):
 
 
 def auth_view(request):
-	print '1'
 	username = request.POST.get('username', '')
 	password = request.POST.get('password', '')
 	user = auth.authenticate(username=username, password=password)
 
-	print '2'
+	print 'logging in'
 	if user is not None:
 		auth.login(request, user)
 		return render_to_response ('accounts/loggedin.html')#HttpResponseRedirect('blog/loggedin.html')
@@ -38,8 +37,9 @@ def invalid_login(request):
 	return render_to_response('accounts/invalid_login.html')
 
 def logout(request):
-	auth.logout(request)
-	return render_to_response('accounts/logout.html')
+    print 'logging out'
+    auth.logout(request)
+    return render_to_response('accounts/logout.html')
 
 
 def register_user(request):
