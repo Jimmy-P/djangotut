@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.contrib import auth
 from django.core.context_processors import csrf
 from django.contrib.auth.models import User
-#from .models import Post
+from blog.models import Post
 from django.template import RequestContext
 #from django.views.decorators.csrf import csrf_exempt
 #from .forms import MyRegistrationForm
@@ -28,6 +28,10 @@ def auth_view(request):
 		return render_to_response ('accounts/loggedin.html')#HttpResponseRedirect('blog/loggedin.html')
 	else:
 		return render_to_response ('accounts/invalid.html')#HttpResponseRedirect('blog/invalid.html')
+
+#return render(request, 'blog/post/list.html', {'page': page,
+#                                                   'posts': posts})
+
 
 def loggedin(request):
 	return render_to_response('accounts/loggedin.html', {'full_name': request.user.username},

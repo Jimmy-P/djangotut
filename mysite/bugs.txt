@@ -6,6 +6,4 @@
 3/2: I've started from scratch following the Django By Example videos. I've setup the basic blog and comments functions, but the comments form is not rendering despite my code seemingly being identical to the tutorial content.
 
 
-8/2: Logged in user must have a name that is an int value. Because of line 108 in blog/views.py
-     Slug = post title, so if two users post with the same title on the same day it will lead to a problem
-     
+8/2: Resolved
