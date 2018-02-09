@@ -104,8 +104,8 @@ def postblog(request):
     if(request.method == 'POST'):
         print "request.POST", request.POST
         title = request.POST['title']
-        slug = request.POST['slug']
-        author = request.POST['author']#request.user.get_username()
+        slug = request.POST['title']
+        author = request.user.get_username()#request.POST['author']#
         body = request.POST['body']
         u = User.objects.get(id=int(author))	 ##NEEDFIX		
         post = Post(title=title, author=u, body=body, slug=title)#author=u, body=body,)
