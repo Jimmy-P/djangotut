@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.contrib import auth
 from django.core.context_processors import csrf
 from django.contrib.auth.models import User
-from blog.models import Post
+#from .models import Post
 from django.template import RequestContext
 #from django.views.decorators.csrf import csrf_exempt
 #from .forms import MyRegistrationForm
@@ -12,33 +12,29 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 
 def login(request):
-	c = {}
-	c.update(csrf(request))
-	return render_to_response('accounts/login.html', c)
+    c = {}
+    c.update(csrf(request))
+    return render_to_response('accounts/login.html', c)
 
 
 def auth_view(request):
-	username = request.POST.get('username', '')
-	password = request.POST.get('password', '')
-	user = auth.authenticate(username=username, password=password)
+    username = request.POST.get('username', '')
+    password = request.POST.get('password', '')
+    user = auth.authenticate(username=username, password=password)
 
-	print 'logging in'
-	if user is not None:
-		auth.login(request, user)
-		return render_to_response ('accounts/loggedin.html')#HttpResponseRedirect('blog/loggedin.html')
-	else:
-		return render_to_response ('accounts/invalid.html')#HttpResponseRedirect('blog/invalid.html')
-
-#return render(request, 'blog/post/list.html', {'page': page,
-#                                                   'posts': posts})
-
+    print 'logging in'
+    if user is not None:
+        auth.login(request, user)
+        return redirect('/blog/')
+    else:
+        return render_to_response ('accounts/invalid.html')#HttpResponseRedirect('blog/invalid.html')
 
 def loggedin(request):
-	return render_to_response('accounts/loggedin.html', {'full_name': request.user.username},
+    return render_to_response('accounts/loggedin.html', {'full_name': request.user.username},
                    context_instance=RequestContext(request))
 
 def invalid_login(request):
-	return render_to_response('accounts/invalid_login.html')
+    return render_to_response('accounts/invalid_login.html')
 
 def logout(request):
     print 'logging out'
