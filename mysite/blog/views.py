@@ -13,6 +13,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import ListView
 from .forms import EmailPostForm, CommentForm
 from django.core.mail import send_mail
+from django.template.defaultfilters import slugify
 
 #Prints the 10 first objects in the list
 #def post_list(request):
@@ -39,7 +40,7 @@ def post_list(request):
         posts = paginator.page(paginator.num_pages)
     return render(request, 'blog/post/list.html', {'page': page,
                                                    'posts': posts})
-
+#Displays all posts with status published,max 3 per page
 class PostListView(ListView):
     queryset = Post.published.all()
     context_object_name = 'posts'
@@ -97,28 +98,29 @@ def post_share(request, post_id):
                                                     'sent': sent})
 
 
-#adds a new Post object to the list using title, author and body
+#adds a new Post object using title, author and body
 def postblog(request):
 
     if(request.method == 'POST'):
         print "request.POST", request.POST
         title = request.POST['title']
-        author = request.user.get_username()#request.POST['author']#
+        slug = request.POST['slug']
+        author = request.POST['author']#request.user.get_username()
         body = request.POST['body']
-        u = User.objects.get(id=int(author))			
-        post = Post(title=title, author=u, body=body,)
-        status = 'published'
+        u = User.objects.get(id=int(author))	 ##NEEDFIX		
+        post = Post(title=title, author=u, body=body, slug=title)#author=u, body=body,)
+        post.status = 'published'
         post.save()
 
         return redirect('/blog')#return render(request, 'blog/post_blog.html')
     else:
-#		print "request.user", request.user.id
+		print "request.user", request.user.id
 		users = User.objects.all()
 		user = {
 		      'users':users
 		}
 
-		return render(request, 'blog/post_blog.html'    )
+		return render(request, 'blog/post_blog.html')
 #
 #def base(request):
 #	return render_to_response('blog/base.html')
