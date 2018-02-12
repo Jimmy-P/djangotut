@@ -7,3 +7,5 @@
 
 
 8/2: Resolved
+
+12/2: Post titles can not contain spaces. Need to fix the slug generation
