@@ -59,7 +59,6 @@ def post_detail(request, year, month, day, post):
     comments = post.comments.filter(active=True)
     if request.method == 'POST':
         #Comment was posted
-        print 'commentprint', request.POST
         comment_form = CommentForm(data=request.POST)
 
         if comment_form.is_valid():
@@ -67,6 +66,7 @@ def post_detail(request, year, month, day, post):
             new_comment = comment_form.save(commit=False)
             #Assign currnt post to comment
             new_comment.post = post
+            new_comment.name = request.user.get_username()
             #Save comment to db
             new_comment.save()
     else:
