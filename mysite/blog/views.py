@@ -105,13 +105,13 @@ def postblog(request):
     if(request.method == 'POST'):
         print "request.POST", request.POST
         title = request.POST['title']
-        slug = request.POST['title']
+#        slug = slugify(post.title)
         author = request.user.get_username()
         #print request.POST['author']#
         body = request.POST['body']
         print 'author, type(author): ', author, type(author)
-        u = User.objects.get(username=author)	 ##NEEDFIX		
-        post = Post(title=title, author=u, body=body, slug=title)#author=u, body=body,)
+        u = User.objects.get(username=author)
+        post = Post(title=title, author=u, body=body, slug=slugify(title))#author=u, body=body,)
         post.status = 'published'
         post.save()
 
