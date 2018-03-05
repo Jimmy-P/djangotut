@@ -4,9 +4,18 @@
 
 {% block content %}
 	<h1>{{ post.title }}</h1>
+    <ul>
+		{% if request.user == post.author %}
+		<li>
+			<form class="edit-link" action="/edit" method="post">
+				{% csrf_token %}
+				<button type="submit">Edit</button>
+			</form>
+		</li>
+		{% endif %}
 	<p class="date">Published {{ post.publish }} by {{ post.author }}</p>
 		{{ post.body|linebreaks }}
-    <p><a href="{% url "blog:post_share" post.id %}">Share this post</a></p>
+    
 
     {% with comments.count as total_comments %}
         <h2>{{ total_comments }} comment{{ total_comments|pluralize }}</h2>

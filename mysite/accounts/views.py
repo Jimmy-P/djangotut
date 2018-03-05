@@ -3,7 +3,6 @@ from django.http import HttpResponseRedirect
 from django.contrib import auth
 from django.core.context_processors import csrf
 from django.contrib.auth.models import User
-#from .models import Post
 from django.template import RequestContext
 #from django.views.decorators.csrf import csrf_exempt
 #from .forms import MyRegistrationForm
@@ -12,12 +11,14 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 
 def login(request):
+    print '1'
     c = {}
     c.update(csrf(request))
     return render_to_response('accounts/login.html', c)
 
 
 def auth_view(request):
+    print '2'
     username = request.POST.get('username', '')
     password = request.POST.get('password', '')
     user = auth.authenticate(username=username, password=password)
@@ -41,7 +42,9 @@ def logout(request):
     auth.logout(request)
     return render_to_response('accounts/logout.html')
 
+#If this view is accessed with post method, it will take information from the form and save it to the DB.
 
+#Otherwise it will display the empty form. 
 def register_user(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -58,6 +61,6 @@ def register_user(request):
     args['form'] = form
     
     return render_to_response('accounts/register.html', args)
-
+#This method is obsolete (?)
 def register_success(request):
     return render_to_response('accounts/register_success.html/')

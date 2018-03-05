@@ -110,7 +110,7 @@ def postblog(request):
         body = request.POST['body']
         print 'author, type(author): ', author, type(author)
         u = User.objects.get(username=author)
-        post = Post(title=title, author=u, body=body, slug=slug)#author=u, body=body,)
+        post = Post(title=title, author=u, body=body, slug=slug)
         post.status = 'published'
         post.save()
 
@@ -123,7 +123,13 @@ def postblog(request):
 		}
 
 		return render(request, 'blog/post_blog.html')
-#
+'''
+def edit_post(request,pk):
+    template = 'blog/post_blog.html'
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == 'POST':
+'''
+
 #def base(request):
 #	return render_to_response('blog/base.html')
 

@@ -4,3 +4,5 @@
 31/1: It's better to use spaces than tabs to avoid indentation errors; luckily you can set it up so pressing tab inserts 4 spaces and maintain sanity
 3/2: Should use a double underscore for lookups that span relations
 8/2: Much improved general knowledge, hard to pinpoint something specific
+
+19/2: The difference between authentication and login

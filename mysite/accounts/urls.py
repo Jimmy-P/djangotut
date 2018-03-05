@@ -7,7 +7,7 @@ app_name = 'accounts'
 urlpatterns = [
 
 #User auth urls
-	url(r'^login$', 'accounts.views.login'),
+	url(r'^login/', 'accounts.views.login'),
 	url(r'^auth$', 'accounts.views.auth_view'),
 	url(r'^logout$', 'accounts.views.logout'),
 	url(r'^loggedin$', 'accounts.views.loggedin'),
