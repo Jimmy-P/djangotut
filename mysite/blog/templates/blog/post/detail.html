@@ -5,18 +5,20 @@
 {% block content %}
 	<h1>{{ post.title }}</h1>
     <ul>
-		{% if request.user == post.author %}
+        {% if request.user == post.author %}
 		<li>
-			<form class="edit-link" action="/edit" method="post">
+			<form action="{% url 'edit_post' id=post.id %}" method="post">
 				{% csrf_token %}
 				<button type="submit">Edit</button>
 			</form>
 		</li>
 		{% endif %}
+        {% if post.edited == True %}
+        <p class="date">Edited {{ post.updated }} by {{ post.author }}</p>
+        {% endif %}
 	<p class="date">Published {{ post.publish }} by {{ post.author }}</p>
 		{{ post.body|linebreaks }}
     
-
     {% with comments.count as total_comments %}
         <h2>{{ total_comments }} comment{{ total_comments|pluralize }}</h2>
     {% endwith %}

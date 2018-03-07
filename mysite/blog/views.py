@@ -11,9 +11,10 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 #from django.contrib.auth import login, logout
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import ListView
-from .forms import EmailPostForm, CommentForm
+from .forms import EmailPostForm, CommentForm, PostForm
 from django.core.mail import send_mail
 from django.template.defaultfilters import slugify
+from datetime import datetime
 
 #Prints the 10 first objects in the list
 #def post_list(request):
@@ -98,7 +99,7 @@ def post_share(request, post_id):
                                                     'form': form,
                                                     'sent': sent})
 
-
+'''
 #adds a new Post object using title, author and body
 def postblog(request):
 
@@ -124,11 +125,36 @@ def postblog(request):
 
 		return render(request, 'blog/post_blog.html')
 '''
-def edit_post(request,pk):
+#This method of adding new posts uses a form
+def postblog(request):
+    form = PostForm(request.POST)
+    if form.is_valid():
+        post = form.save(commit=False)
+        slug = slugify(post.title)
+        post.slug = slug
+        post.author = request.user
+        post.status = 'published'
+        post.save()
+        return redirect('/blog')
+    else:
+        form = PostForm()
+    return render (request, 'blog/post_blog.html', {'form':form})
+
+
+
+def edit_post(request,id):
     template = 'blog/post_blog.html'
-    post = get_object_or_404(Post, pk=pk)
+    post = get_object_or_404(Post, id=id)
     if request.method == 'POST':
-'''
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            post.edited = True
+            post.save()
+            return redirect('/blog')
+    else:
+        form = PostForm(instance=post)
+    return render (request, 'blog/edit_post.html', {'form':form})
+
 
 #def base(request):
 #	return render_to_response('blog/base.html')

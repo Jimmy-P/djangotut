@@ -1,18 +1,10 @@
 {% include 'partials/header.html' %}
 <center>
 	<title>Create post</title>
-		<div class="container">
+		<div>
+            <h2>New post</h2>
 			<form action="{% url 'postblog' %}" method="post"> {% csrf_token %}	
-				<b>Create Blog</b><br /> <br />
-
-				<label for="title">Post title</label> <br/>
-  				<input placeholder="Title" type="text" name="title" id="title" /><br /><br />
-
-				<label for="body">Body</label> <br/>
-				<textarea placeholder="Body" rows="20" cols="90" name="body" id="body">
-				</textarea>
-				<br/><br />
-				
+				{{ form.as_p }}
 				<p><a href ="/blog">Go back</a></p>
   				<input type="submit" value="Submit post" />
 			</form> 

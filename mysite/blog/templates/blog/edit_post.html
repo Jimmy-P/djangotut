@@ -1,0 +1,10 @@
+{% include 'partials/header.html' %}
+
+<h2>Edit post</h2>
+  <form method="POST" class="post-form">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <br>
+      <button type="submit" class="save btn btn-default">Save</button>
+</form>
+
