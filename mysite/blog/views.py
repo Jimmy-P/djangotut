@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.contrib import auth
 from django.core.context_processors import csrf
 from django.contrib.auth.models import User
-from .models import Post, Comment
+from .models import Post, Comment, User_Profile
 from django.template import RequestContext
 #from django.views.decorators.csrf import csrf_exempt
 #from .forms import MyRegistrationForm
@@ -59,7 +59,7 @@ def post_detail(request, year, month, day, post):
     #Comments list for this post
     comments = post.comments.filter(active=True)
     if request.method == 'POST':
-        #Comment was posted
+        #Comment was\
         comment_form = CommentForm(data=request.POST)
 
         if comment_form.is_valid():
@@ -71,7 +71,21 @@ def post_detail(request, year, month, day, post):
             #Save comment to db
             new_comment.save()
     else:
+        currentuser = request.user
         comment_form = CommentForm()
+        #If the current user is not the author of the post, increase the "views" field by 1
+        if currentuser != post.author:
+            post.views += 1
+            post.save()
+            uplist = User_Profile.objects.filter(user=currentuser, post=post)
+            if uplist.count() == 0:
+                up = User_Profile()
+                up.user = currentuser
+                up.post = post
+                up.postviewed = True
+                post.viewedby += 1
+                up.save()
+                post.save()
 
     return render(request, 'blog/post/detail.html', {'post': post,
                                                      'comments': comments,
@@ -143,12 +157,13 @@ def postblog(request):
 
 
 def edit_post(request,id):
-    template = 'blog/post_blog.html'
+#    template = 'blog/post_blog.html'
     post = get_object_or_404(Post, id=id)
     if request.method == 'POST':
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
             post.edited = True
+            post.editor = request.user
             post.save()
             return redirect('/blog')
     else:

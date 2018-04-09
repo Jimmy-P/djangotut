@@ -8,6 +8,15 @@
 		<h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
 		<p class="date">Published {{ post.publish }} by {{ post.author }}</p>
 		{{ post.body|truncatewords:30|linebreaks }}
+        {% with post.comments.count as total_comments %}
+        <h2>{{ total_comments }} comment{{ total_comments|pluralize }}</h2>
+        {% endwith %}
+        {% with post.views as total_views %}
+        <h2>Viewed {{ total_views }} times</h2>
+        {% endwith %}
+        {% with post.viewedby as viewedby %}
+        <h2>Viewed by {{ viewedby }} users</h2>
+        {% endwith %}
 	{% endfor %}
 
     {% include "pagination.html" with page=page_obj %}

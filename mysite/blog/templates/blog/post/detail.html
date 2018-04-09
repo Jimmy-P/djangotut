@@ -5,27 +5,27 @@
 {% block content %}
 	<h1>{{ post.title }}</h1>
     <ul>
-        {% if request.user == post.author %}
+        {% if request.user == post.author or user.is_superuser %}
 		<li>
-			<form action="{% url 'edit_post' id=post.id %}" method="post">
+			<form action="{% url 'edit_post' id=post.id %}" method="get">
 				{% csrf_token %}
 				<button type="submit">Edit</button>
 			</form>
 		</li>
 		{% endif %}
         {% if post.edited == True %}
-        <p class="date">Edited {{ post.updated }} by {{ post.author }}</p>
+        <p class="date">Last edited {{ post.updated|timesince }} ago by {{ post.editor }}</p>
         {% endif %}
-	<p class="date">Published {{ post.publish }} by {{ post.author }}</p>
+	<p class="date">Published {{ post.publish|timesince }} ago by {{ post.author }}</p>
 		{{ post.body|linebreaks }}
-    
+    <h1></h1>
     {% with comments.count as total_comments %}
         <h2>{{ total_comments }} comment{{ total_comments|pluralize }}</h2>
     {% endwith %}
 
     {% for comment in comments %}
         <div class="comment">
-            <p class="info">Comment {{ forloop.counter }} by {{ comment.name }} {{ comment.created }}</p>
+            <p class="info">Comment {{ forloop.counter }} by {{ comment.name }} {{ comment.created|timesince }} ago</p>
             {{ comment.body|linebreaks }}
         </div>
     {% empty %}

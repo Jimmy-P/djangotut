@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
+from jsonfield import JSONField
 
 
 class PublishedManager(models.Manager):
@@ -23,6 +24,10 @@ class Post(models.Model):
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
     edited = models.BooleanField(default=False)
+    editor = models.ForeignKey(User, related_name='edits', null=True, blank=True)
+    views = models.IntegerField(default=0)
+    viewedby = models.IntegerField(default=0)
+
 
     objects = models.Manager() # The default manager.
     published = PublishedManager() # The Dahl-specific manager.
@@ -38,6 +43,14 @@ class Post(models.Model):
                                                  self.publish.strftime('%m'),
                                                  self.publish.strftime('%d'),
                                                  self.slug])
+
+class User_Profile(models.Model):
+    post = models.ForeignKey(Post, null=True, blank=True)
+    user = models.ForeignKey(User, null=True, blank=True)
+    postviewed = models.BooleanField(default=False) #Turns out this field is not necessary
+
+#    def __str__(self):
+#        return self.title
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, related_name='comments')
